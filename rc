@@ -4,7 +4,7 @@
 ##################################################################
 # Initialization
 
-ZDIR=$HOME/.zshrc.d
+ZDIR=$HOME/.zsh
 fpath=($fpath $ZDIR/functions)
 autoload -U "$ZDIR/functions"/*(N:t) >/dev/null
 zshrc_load_status 'executing .zsh/rc...'
@@ -54,7 +54,7 @@ setopt appendhistory
 ##################################################################
 # Aliases
 zshrc_load_status 'loading aliases...'
-source ~/.zshrc.d/alias
+source $ZDIR/alias
 
 ##################################################################
 # Key-Bindings
@@ -66,7 +66,7 @@ bindkey -e
 ##################################################################
 # auto completion tweaks
 zshrc_load_status 'loading completion...'
-source ~/.zshrc.d/completion
+source $ZDIR/completion
 
 ##################################################################
 # Misc
@@ -83,15 +83,16 @@ zshrc_load_zplug $zplugs
 ##################################################################
 # They set us up the prompt ...
 zshrc_load_status 'setting the prompt...'
-source ~/.zshrc.d/prompt
+source $ZDIR/prompt
 
 ##################################################################
 # Host specific adjustments
 
 local host_type="$(uname | tr '[A-Z]' '[a-z]')"
+local perhostfile=$ZDIR/os/$host_type
 
-if [[ -f ~/.zshrc.d/os/$host_type ]]; then
-    source ~/.zshrc.d/os/$host_type
+if [[ -f $perhostfile ]]; then
+    source $perhostfile
 fi
 
 #LS_COLORS got defined per arch in the specific files

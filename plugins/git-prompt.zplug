@@ -19,4 +19,4 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_lgray%}]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="◯"
 
 
-export __GIT_PROMPT_DIR=~/.zshrc.d/plugins/git-prompt
+export __GIT_PROMPT_DIR=$ZPLUGDIR/git-prompt
