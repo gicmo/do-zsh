@@ -1,0 +1,3 @@
+#autoload
+# -*- mode: Shell-script ;-*-
+echo -n "\r.zshrc load: $* ... \e[0K"

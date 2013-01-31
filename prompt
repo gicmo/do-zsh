@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+# -*- mode: Shell-script ;-*-
+
+if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] {
+    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[031;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
+} else {
+    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[030;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
+}
+
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%} )"
+
+#
+_prompt_jobs() {
+    local jobs_status
+    jobs_status=("")
+    [[ $(jobs -l | wc -l) -gt 0 ]] && jobs_status+="%{%F{cyan}%}⚙"
+    echo -n "$jobs_status"
+}
+
+RPROMPT='${return_code}$(_prompt_jobs)$(git_super_status)'
+

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+source $ZPLUGDIR/history-substring-search/zsh-history-substring-search.zsh

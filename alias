@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# -*- mode: Shell-script ;-*-
+
+##################################################################
+# Aliases
+
+export GREP_COLORS="fn=2"
+
+alias mkdir='nocorrect mkdir'
+alias n="nautilus ."
+alias e="emacsclient -n"
+alias grep='grep -n --color=auto'
+alias fgrep='fgrep -n --color=auto'
+alias run-help=man
+alias hist="grep '$1' ~/.zsh_history"
+

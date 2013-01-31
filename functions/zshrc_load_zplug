@@ -1,0 +1,13 @@
+#autoload
+# -*- mode: Shell-script ;-*-
+ZPLUGDIR=$ZDIR/plugins
+
+for plug in $*; do
+    cur_zplug=$ZPLUGDIR/$plug.zplug
+    if [ -f $cur_zplug ]; then
+	zshrc_load_status "loading plugin: $plug ..."
+	source $cur_zplug
+    else
+	echo -n "[W] $cur_zplug not found!\n"
+    fi
+done

@@ -1,0 +1,18 @@
+# colour ls
+#eval `dircolors`
+export LS_OPTIONS="-hF --color=auto"
+
+#ENVIROMENT
+#use the full powers
+export MAKEFLAGS="-j`ls -1F /sys/devices/system/cpu | grep "\/" | wc -l`"
+
+#GtkFileChooser needs be thought to behave
+export GTK_DEFAULT_FILECHOOSER_DIR=$HOME
+
+
+#editor setup
+export VISUAL="gvim -f"
+export EDITOR="$VISUAL"
+export CVSEDITOR="gvim -f"
+alias mvim=gvim
+

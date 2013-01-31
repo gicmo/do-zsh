@@ -1,0 +1,18 @@
+export CLICOLOR=1
+export LS_OPTIONS="-hGF"
+export LSCOLORS=ExFxCxDxBxegedabagacad
+export WIRESHARK_APP_DIR="/Applications/Utilities/Wireshark.app"
+
+export VISUAL="mvim -f"
+export EDITOR="$VISUAL"
+export CVSEDITOR="mvim -f"
+
+export ARCH=maci
+
+alias ls='ls $LS_OPTIONS'
+alias cdf='cd `psod`'
+
+alias dmesg="sudo dmesg"
+alias wrshark="sudo WIRESHARK_APP_DIR=\"/Applications/Utilities/Wireshark.app\" wireshark"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+alias ec="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"

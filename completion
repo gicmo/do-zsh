@@ -1,0 +1,17 @@
+#!/usr/bin/env/zsh
+# -*- mode: Shell-script ;-*-
+
+# auto completion tweaks
+autoload -U compinit && compinit
+
+zstyle -e ':completion::*:hosts' hosts 'reply=($(sed -e "/^#/d" -e "s/ .*\$//" -e "s/,/ /g" /etc/ssh_known_hosts(N) ~/.ssh/known_hosts(N) 2>/dev/null | xargs) $(grep \^Host ~/.ssh/config(N) | cut -f2 -d\  2>/dev/null | xargs))'
+
+# Hosts to use for completion, see later zstyle.
+zstyle '*' hosts $(awk '/^[^#]/ {print $3" "$4" "$5}' /etc/hosts)
+
+# Filename suffixes to ignore during completion, except after rm
+# command.
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns \
+    '*?.o' '*~' # '*?.orig'
+
+zmodload -i zsh/complist

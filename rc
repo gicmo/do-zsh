@@ -1,0 +1,109 @@
+#!/usr/bin/env zsh
+# .zshrc file © 2011-2013 Christian Kellner <ck@xatom.net>
+
+##################################################################
+# Initialization
+
+ZDIR=$HOME/.zshrc.d
+fpath=($fpath $ZDIR/functions)
+autoload -U "$ZDIR/functions"/*(N:t) >/dev/null
+zshrc_load_status 'executing .zsh/rc...'
+
+
+##################################################################
+# Basic setup
+
+autoload -U colors && colors
+setenv() { export $1=$2 }
+
+setopt nobeep		# BEEEEEEEEEEEP!
+setopt autocd           # change to dirs without cd
+setopt correct
+setopt completeinword   # not just at the end
+setopt alwaystoend      # when complete from middle, move cursor
+
+# jump to each element in a path with m-f m-b, same for kill-word, etc.
+export WORDCHARS=''
+
+export REPORTTIME=6
+
+case $TERM in
+xterm*|screen*|rxvt*)
+precmd () { print -Pn "\e]0;%n@%m [%3c]\a"}
+;;
+esac
+
+##################################################################
+# Environment setup
+
+export EMAIL_ADDRESS="ck@xatom.net"
+export GOOGLE_WEB_API_KEY="R/xWOSZQFHIsmgbkLaW4s00sgvsfjg1b"
+
+#Setup PATH
+export PATH=$PATH:~/.bin:/usr/local/bin:/usr/local/cuda/bin
+
+##################################################################
+# History
+
+export HISTSIZE=500
+export SAVEHIST=500
+export HISTFILE=~/.zsh_history
+setopt hist_ignore_dups
+setopt appendhistory
+
+##################################################################
+# Aliases
+zshrc_load_status 'loading aliases...'
+source ~/.zshrc.d/alias
+
+##################################################################
+# Key-Bindings
+bindkey -e
+
+#   bind special keys according to readline configuration
+# eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
+
+##################################################################
+# auto completion tweaks
+zshrc_load_status 'loading completion...'
+source ~/.zshrc.d/completion
+
+##################################################################
+# Misc
+
+# smart urls
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+##################################################################
+# Plugins
+zplugs=(git-prompt syntax-highlighting history-substring-search)
+zshrc_load_zplug $zplugs
+
+##################################################################
+# They set us up the prompt ...
+zshrc_load_status 'setting the prompt...'
+source ~/.zshrc.d/prompt
+
+##################################################################
+# Host specific adjustments
+
+local host_type="$(uname | tr '[A-Z]' '[a-z]')"
+
+if [[ -f ~/.zshrc.d/os/$host_type ]]; then
+    source ~/.zshrc.d/os/$host_type
+fi
+
+#LS_COLORS got defined per arch in the specific files
+alias ls="ls $LS_OPTIONS"
+#zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+################################################################
+# We are done (almost).
+echo -n "\r\e[0K"
+
+if [[ (-d ~/.fortunes) && (-x $(whence -p fortune))]]; then
+    fortune ~/.fortunes
+fi
+
