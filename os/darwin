@@ -1,18 +1,77 @@
-export CLICOLOR=1
-export LS_OPTIONS="-hGF"
-export LSCOLORS=ExFxCxDxBxegedabagacad
-export WIRESHARK_APP_DIR="/Applications/Utilities/Wireshark.app"
+#!/usr/bin/env zsh
 
-export VISUAL="mvim -f"
-export EDITOR="$VISUAL"
-export CVSEDITOR="mvim -f"
+#functions here taken from oh-my-zsh plugin (v 1.1.0) by Sorin Ionescu (sorin.ionescu@gmail.com)
+function pfd() {
+  osascript 2>/dev/null <<EOF
+    tell application "Finder"
+      return POSIX path of (target of window 1 as alias)
+    end tell
+EOF
+}
 
-export ARCH=maci
+function pfs() {
+  osascript 2>/dev/null <<EOF
+    set output to ""
+    tell application "Finder" to set the_selection to selection
+    set item_count to count the_selection
+    repeat with item_index from 1 to count the_selection
+      if item_index is less than item_count then set the_delimiter to "\n"
+      if item_index is item_count then set the_delimiter to ""
+      set output to output & ((item item_index of the_selection as alias)'s POSIX path) & the_delimiter
+    end repeat
+EOF
+}
+
+function cdf() {
+  cd "$(pfd)"
+}
+
+function pushdf() {
+  pushd "$(pfd)"
+}
+
+function quick-look() {
+  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
+}
+
+function man-preview() {
+  man -t "$@" | open -f -a Preview
+}
+
+function trash() {
+  local trash_dir="${HOME}/.Trash"
+  local temp_ifs=$IFS
+  IFS=$'\n'
+  for item in "$@"; do
+    if [[ -e "$item" ]]; then
+      item_name="$(basename $item)"
+      if [[ -e "${trash_dir}/${item_name}" ]]; then
+        mv -f "$item" "${trash_dir}/${item_name} $(date "+%H-%M-%S")"
+      else
+        mv -f "$item" "${trash_dir}/"
+      fi
+    fi
+  done
+  IFS=$temp_ifs
+}
+
+## --
+
+CLICOLOR=1
+LS_OPTIONS="-hGF"
+LSCOLORS=ExFxCxDxBxegedabagacad
+
+EMACSROOT="/Applications/Emacs.app/Contents/MacOS"
+EMACS="$EMACSROOT/Emacs"
+VISUAL="$EMACS -nw"
+EDITOR="$EMCAS -nw"
+CVSEDITOR="$EMACS -nw"
+
+ARCH=maci
 
 alias ls='ls $LS_OPTIONS'
-alias cdf='cd `psod`'
 
 alias dmesg="sudo dmesg"
 alias wrshark="sudo WIRESHARK_APP_DIR=\"/Applications/Utilities/Wireshark.app\" wireshark"
-alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-alias ec="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+alias emacs="$EMACS"
+alias ec="$EMACSROOT/bin/emacsclient"
