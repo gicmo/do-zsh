@@ -77,7 +77,11 @@ zle -N self-insert url-quote-magic
 
 ##################################################################
 # Plugins
-zplugs=(git-prompt syntax-highlighting history-substring-search)
+zplugs=(git-prompt               \
+        syntax-highlighting      \
+        history-substring-search \
+        forklift)
+
 zshrc_load_zplug $zplugs
 
 ##################################################################
