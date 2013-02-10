@@ -5,7 +5,9 @@ export LS_OPTIONS="-hF --color=auto"
 
 #ENVIROMENT
 #use the full powers
-export MAKEFLAGS="-j`ls -1F /sys/devices/system/cpu | grep "\/" | wc -l`"
+if [[ -d /sys/devices/system/cpu ]]; then
+  export MAKEFLAGS="-j`ls -1F /sys/devices/system/cpu | grep "\/" | wc -l`"
+fi
 
 #GtkFileChooser needs be thought to behave
 export GTK_DEFAULT_FILECHOOSER_DIR=$HOME
