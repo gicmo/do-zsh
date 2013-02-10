@@ -15,5 +15,5 @@ alias e="emacsclient -n"
 alias grep='grep -n --color=auto'
 alias fgrep='fgrep -n --color=auto'
 alias run-help=man
-alias hist="grep '$1' ~/.zsh_history"
+alias hist="history"
 
