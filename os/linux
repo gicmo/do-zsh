@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # colour ls
 #eval `dircolors`
 export LS_OPTIONS="-hF --color=auto"
@@ -8,7 +9,6 @@ export MAKEFLAGS="-j`ls -1F /sys/devices/system/cpu | grep "\/" | wc -l`"
 
 #GtkFileChooser needs be thought to behave
 export GTK_DEFAULT_FILECHOOSER_DIR=$HOME
-
 
 #editor setup
 export VISUAL="gvim -f"
