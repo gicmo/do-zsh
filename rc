@@ -97,8 +97,6 @@ fi
 
 #LS_COLORS got defined per arch in the specific files
 alias ls="ls $LS_OPTIONS"
-#zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 ################################################################
 # We are done (almost).
