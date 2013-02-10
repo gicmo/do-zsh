@@ -17,10 +17,13 @@ autoload -U colors && colors
 setenv() { export $1=$2 }
 
 setopt nobeep		# BEEEEEEEEEEEP!
-setopt autocd           # change to dirs without cd
 setopt correct
-setopt completeinword   # not just at the end
-setopt alwaystoend      # when complete from middle, move cursor
+
+setopt autocd           # change to dirs without cd
+setopt auto_name_dirs
+setopt auto_pushd
+setopt pushd_ignore_dups
+
 
 # jump to each element in a path with m-f m-b, same for kill-word, etc.
 export WORDCHARS=''
@@ -68,6 +71,7 @@ bindkey -e
 # auto completion tweaks
 zshrc_load_status 'loading completion...'
 source $ZDIR/completion
+
 
 ##################################################################
 # Misc
