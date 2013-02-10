@@ -6,6 +6,9 @@
 
 export GREP_COLORS="fn=2"
 
+alias pu='pushd'
+alias po='popd'
+
 alias mkdir='nocorrect mkdir'
 alias n="nautilus ."
 alias e="emacsclient -n"
