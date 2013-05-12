@@ -44,6 +44,7 @@ export GOOGLE_WEB_API_KEY="R/xWOSZQFHIsmgbkLaW4s00sgvsfjg1b"
 
 #Setup PATH
 export PATH=$HOME/.bin:/usr/local/bin:/usr/local/cuda/bin:$PATH
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ##################################################################
 # History
