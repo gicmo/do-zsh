@@ -1,0 +1,8 @@
+#!/usr/bin/zsh
+
+CANOPY_DIR=$HOME/Library/Enthought/Canopy_64bit
+if [[ -s $CANOPY_DIR/User/bin/activate ]]; then
+    VIRTUAL_ENV_DISABLE_PROMPT=1
+    alias canopy_activate="source $CANOPY_DIR/User/bin/activate"
+fi
+
