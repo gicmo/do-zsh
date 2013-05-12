@@ -43,7 +43,7 @@ export EMAIL_ADDRESS="ck@xatom.net"
 export GOOGLE_WEB_API_KEY="R/xWOSZQFHIsmgbkLaW4s00sgvsfjg1b"
 
 #Setup PATH
-export PATH=$PATH:~/.bin:/usr/local/bin:/usr/local/cuda/bin
+export PATH=$HOME/.bin:/usr/local/bin:/usr/local/cuda/bin:$PATH
 
 ##################################################################
 # History
