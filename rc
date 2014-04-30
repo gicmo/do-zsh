@@ -92,7 +92,8 @@ zplugs=(git-prompt               \
         syntax-highlighting      \
         history-substring-search \
         forklift                 \
-        canopy)
+        canopy                   \
+        pip)
 
 zshrc_load_zplug $zplugs
 
