@@ -1,0 +1,30 @@
+#!/usr/bin/zsh
+
+function setup_brewed_paths() {
+   local ruby_path=$(brew --prefix ruby) 2>/dev/null
+   local node_path=$(brew --prefix npm) 2>/dev/null
+
+   if [[ -n $ruby_path && -d $ruby_path ]]; then
+      PATH=$PATH:$ruby_path/bin
+   fi
+
+   if [[ -n $node_path && -d $node_path ]]; then
+      PATH=$PATH:$node_path/bin
+   fi
+
+   if [[ -d /usr/local/share/python ]]; then
+      PATH=$PATH:/usr/local/share/python
+   fi
+
+   if [[ -d /usr/local/share/python3 ]]; then
+      PATH=$PATH:/usr/local/share/python3
+   fi
+
+   export PATH
+}
+
+if [[ -x /usr/local/bin/brew ]]; then
+   setup_brewed_paths
+fi
+
+unfunction setup_brewed_paths
