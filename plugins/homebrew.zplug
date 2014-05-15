@@ -12,14 +12,6 @@ function setup_brewed_paths() {
       PATH=$PATH:$node_path/bin
    fi
 
-   if [[ -d /usr/local/share/python ]]; then
-      PATH=$PATH:/usr/local/share/python
-   fi
-
-   if [[ -d /usr/local/share/python3 ]]; then
-      PATH=$PATH:/usr/local/share/python3
-   fi
-
    export PATH
 }
 
