@@ -122,6 +122,10 @@ alias ls="ls $LS_OPTIONS"
 # We are done (almost).
 echo -n "\r\e[0K"
 
+if [[ (-x $(whence -p archey))]]; then
+    archey
+fi
+
 if [[ (-d ~/.fortunes) && (-x $(whence -p fortune))]]; then
     fortune ~/.fortunes
 fi
