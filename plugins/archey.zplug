@@ -11,7 +11,7 @@ if [[ "$host_type" == "darwin" ]]; then
 	}
     fi
 
-elif [[ "host_type" == "linux" ]]; then
+elif [[ "$host_type" == "linux" ]]; then
 
     function _archey() {
 	    local _archey_cmd="$ZPLUGDIR/archey/linux/archey"
