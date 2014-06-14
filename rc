@@ -96,6 +96,7 @@ zplugs=(git-prompt               \
         homebrew                 \
         forklift                 \
         canopy                   \
+        archey                   \
         pip)
 
 zshrc_load_zplug $zplugs
@@ -122,8 +123,8 @@ alias ls="ls $LS_OPTIONS"
 # We are done (almost).
 echo -n "\r\e[0K"
 
-if [[ (-x $(whence -p archey))]]; then
-    archey
+if type _archey &> /dev/null; then
+    _archey
 fi
 
 if [[ (-d ~/.fortunes) && (-x $(whence -p fortune))]]; then

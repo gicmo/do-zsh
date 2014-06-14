@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+local host_type=`uname | tr '[A-Z]' '[a-z]'`
+
+if [[ "$host_type" == "darwin" ]]; then
+
+    if [[ -e "$ZPLUGDIR/archey/archey-${host_type}" ]]; then
+	function _archey() {
+	    local _archey_cmd="$ZPLUGDIR/archey/darwin/bin/archey"
+	    $_archey_cmd
+	}
+    fi
+
+elif [[ "host_type" == "linux" ]]; then
+
+    function _archey() {
+	    local _archey_cmd="$ZPLUGDIR/archey/linux/archey"
+	    $_archey_cmd
+	}
+
+fi
