@@ -7,3 +7,6 @@
 [submodule "plugins/syntax-highlighting"]
 	path = plugins/syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "plugins/archey/darwin"]
+	path = plugins/archey/darwin
+	url = git@github.com:gicmo/archey-osx.git
