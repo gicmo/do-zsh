@@ -3,8 +3,7 @@
 local host_type=`uname | tr '[A-Z]' '[a-z]'`
 
 if [[ "$host_type" == "darwin" ]]; then
-
-    if [[ -e "$ZPLUGDIR/archey/archey-${host_type}" ]]; then
+    if [[ -e "$ZPLUGDIR/archey/darwin/bin/archey" ]]; then
 	function _archey() {
 	    local _archey_cmd="$ZPLUGDIR/archey/darwin/bin/archey"
 	    $_archey_cmd
