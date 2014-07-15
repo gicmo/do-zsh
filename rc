@@ -89,6 +89,11 @@ zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 ##################################################################
+# They set us up the prompt ...
+zshrc_load_status 'setting the prompt...'
+source $ZDIR/prompt
+
+##################################################################
 # Plugins
 zplugs=(git-prompt               \
         syntax-highlighting      \
@@ -100,11 +105,6 @@ zplugs=(git-prompt               \
         pip)
 
 zshrc_load_zplug $zplugs
-
-##################################################################
-# They set us up the prompt ...
-zshrc_load_status 'setting the prompt...'
-source $ZDIR/prompt
 
 ##################################################################
 # Host specific adjustments
