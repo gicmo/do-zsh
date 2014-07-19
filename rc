@@ -95,6 +95,10 @@ source $ZDIR/prompt
 
 ##################################################################
 # Plugins
+
+#deterime host for plugins and host adjustments
+local host_type="$(uname | tr '[A-Z]' '[a-z]')"
+
 zplugs=(git-prompt               \
         syntax-highlighting      \
         history-substring-search \
@@ -110,7 +114,6 @@ zshrc_load_zplug $zplugs
 ##################################################################
 # Host specific adjustments
 
-local host_type="$(uname | tr '[A-Z]' '[a-z]')"
 local perhostfile=$ZDIR/os/$host_type
 
 if [[ -f $perhostfile ]]; then
