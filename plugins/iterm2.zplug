@@ -2,6 +2,11 @@
 
 ST_NAME=`hostname -f`
 
+# Only enable iTerm shell integration if we are running iTerm
+# or we are running over ssh. The latter is still somewhat
+# dangerous if connecting from a linux host but good enough for now
+if [[ "$TERM_PROGRAM" == "iTerm.app" || -n "$SSH_CLIENT" ]]; then
+
 # iTerm2 inform terminal that command starts here
 before_cmd_executes() {
   printf "\033]133;D;$?\007\033]1337;RemoteHost='$USER'@`hostname -f`\007\033]1337;CurrentDir=$PWD\007"
@@ -36,3 +41,4 @@ printf "\033]1337;RemoteHost='$USER'@`hostname -f`\007"
 printf "\033]1337;CurrentDir=$PWD\007"
 printf "\033]1337;ShellIntegrationVersion=1\007"
 
+fi
