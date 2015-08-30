@@ -103,6 +103,7 @@ zplugs=(git-prompt               \
         syntax-highlighting      \
         history-substring-search \
         homebrew                 \
+	homeshick                \
         forklift                 \
         canopy                   \
         archey                   \
