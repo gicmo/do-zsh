@@ -71,12 +71,6 @@ bindkey -e
 # eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 
 ##################################################################
-# auto completion tweaks
-zshrc_load_status 'loading completion...'
-source $ZDIR/completion
-
-
-##################################################################
 # Misc
 
 # smart urls
@@ -123,6 +117,13 @@ fi
 
 #LS_COLORS got defined per arch in the specific files
 alias ls="ls $LS_OPTIONS"
+
+##################################################################
+# auto completion tweaks
+
+zshrc_load_status 'loading completion...'
+source $ZDIR/completion
+
 
 ################################################################
 # We are done (almost).
