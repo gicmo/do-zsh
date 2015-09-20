@@ -17,5 +17,15 @@ _prompt_jobs() {
     echo -n "$jobs_status"
 }
 
-RPROMPT='${return_code}$(_prompt_jobs)$(git_super_status)'
+_git_status() {
+    local git_status
+    git_status=("")
+    if (( ${+commands[git-radar]} )) {
+	   git_status=`git-radar --zsh --fetch`
+    }
+    echo -n "$git_status"
+}
+
+setopt PROMPT_SUBST
+RPROMPT='${return_code}$(_prompt_jobs)$(_git_status)'
 

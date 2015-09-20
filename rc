@@ -96,8 +96,7 @@ source $ZDIR/prompt
 #deterime host for plugins and host adjustments
 local host_type="$(uname | tr '[A-Z]' '[a-z]')"
 
-zplugs=(git-prompt               \
-        syntax-highlighting      \
+zplugs=(syntax-highlighting      \
         history-substring-search \
         homebrew                 \
 	homeshick                \
