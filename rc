@@ -96,15 +96,16 @@ source $ZDIR/prompt
 #deterime host for plugins and host adjustments
 local host_type="$(uname | tr '[A-Z]' '[a-z]')"
 
-zplugs=(syntax-highlighting      \
-        history-substring-search \
+zplugs=(history-substring-search \
         homebrew                 \
 	homeshick                \
         forklift                 \
         canopy                   \
         archey                   \
         pip                      \
-	iterm2)
+	iterm2                   \
+	syntax-highlighting      \
+       )
 
 zshrc_load_zplug $zplugs
 
