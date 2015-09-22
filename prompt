@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 # -*- mode: Shell-script ;-*-
 
-if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] {
-    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[031;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
-} else {
-    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[030;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
-}
+#if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] {
+#    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[031;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
+#} else {
+#    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[030;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
+#}
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%} )"
 
@@ -26,6 +26,19 @@ _git_status() {
     echo -n "$git_status"
 }
 
+
+_prompt_where() {
+
+  print -n "%{%f%b%k%}"
+  if [[ -n $SSH_CLIENT || -n $REMOTEHOST || $USER != $LOGNAME || $(id -u) -eq 0 ]] {
+    print -n "%{$fg[blue]%}%n%f@%{$fg[grey]%}%m%f"
+  } else {
+    print -n "%{$fg[grey]%}λ%f"
+  }
+
+  print -n " %3~ %(!.%F{red}.%{$fg[grey]%})→%f"
+}
+
 setopt PROMPT_SUBST
 RPROMPT='${return_code}$(_prompt_jobs)$(_git_status)'
-
+PROMPT='$(_prompt_where) '
