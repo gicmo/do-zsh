@@ -2,7 +2,7 @@
 # -*- mode: Shell-script ;-*-
 
 # auto completion tweaks
-autoload -U compinit && compinit
+autoload -U compinit && compinit -u
 zmodload -i zsh/complist
 
 #############################################
