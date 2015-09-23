@@ -1,12 +1,6 @@
 #!/usr/bin/env zsh
 # -*- mode: Shell-script ;-*-
 
-#if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] {
-#    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[031;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
-#} else {
-#    export PROMPT="%{[034;1m%}%n%{[0m%}@%{[030;1m%}%m%{[0m%} %3c %B%(!.%{[031;1m%}#.%%)%{[0m%}%b "
-#}
-
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%} )"
 
 #
@@ -26,6 +20,19 @@ _git_status() {
     echo -n "$git_status"
 }
 
+function _prompt_pwd {
+  setopt LOCAL_OPTIONS
+  setopt EXTENDED_GLOB
+  # adapted from gh:sorin-ionescu/prezto
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]] {
+    print -n "$MATCH"
+    unset MATCH
+  } else {
+    print -n "${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  }
+}
 
 _prompt_where() {
 
@@ -36,7 +43,7 @@ _prompt_where() {
     print -n "%{$fg[grey]%}λ%f"
   }
 
-  print -n " %3~ %(!.%F{red}.%{$fg[grey]%})→%f"
+  print -n " $(_prompt_pwd) %(!.%F{red}.%{$fg[grey]%})→%f"
 }
 
 setopt PROMPT_SUBST
