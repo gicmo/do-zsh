@@ -132,11 +132,3 @@ source $ZDIR/completion
 # We are done (almost).
 echo -n "\r\e[0K"
 
-if type _archey &> /dev/null; then
-    _archey
-fi
-
-if [[ (-d ~/.fortunes) && (-x $(whence -p fortune))]]; then
-    fortune ~/.fortunes
-fi
-
