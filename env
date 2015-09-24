@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# zshenv file © 2011-2015 Christian Kellner <christian@kellner.me>
+#   - first file to be executed, before zshrc
+
+##################################################################
+# Environment setup
+
+export EMAIL_ADDRESS="ck@xatom.net"
+
+#Setup PATH
+PATH=$HOME/.bin:/usr/local/bin:/usr/local/cuda/bin:$PATH
+PATH=$PATH:$HOME/.rvm/bin
+PATH=$PATH:/usr/local/share/npm/bin
+export PATH
+
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+
+
