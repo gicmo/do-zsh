@@ -8,10 +8,14 @@
 export EMAIL_ADDRESS="ck@xatom.net"
 
 #Setup PATH
-PATH=$HOME/.bin:/usr/local/bin:/usr/local/cuda/bin:$PATH
-PATH=$PATH:$HOME/.rvm/bin
-PATH=$PATH:/usr/local/share/npm/bin
-export PATH
+
+typeset -gU path
+
+path=(
+  $HOME/.bin
+  /usr/local/{bin,sbin}
+  $path
+)
 
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
