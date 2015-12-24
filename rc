@@ -83,13 +83,13 @@ local host_type="$(uname | tr '[A-Z]' '[a-z]')"
 
 zplugs=(history-substring-search \
         homebrew                 \
-	homeshick                \
+        homeshick                \
         forklift                 \
         canopy                   \
         archey                   \
         pip                      \
-	iterm2                   \
-	syntax-highlighting      \
+        iterm2                   \
+        syntax-highlighting      \
        )
 
 zshrc_load_zplug $zplugs
