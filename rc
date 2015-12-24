@@ -85,6 +85,7 @@ zplugs=(history-substring-search \
         homebrew                 \
         homeshick                \
         forklift                 \
+        go                       \
         archey                   \
         pip                      \
         iterm2                   \
