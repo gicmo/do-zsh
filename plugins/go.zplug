@@ -1,4 +1,0 @@
-#!/usr/bin/zsh
-
-export GOPATH=$HOME/Coding/go
-PATH=$PATH:$GOPATH/bin

@@ -7,12 +7,15 @@
 
 export EMAIL_ADDRESS="ck@xatom.net"
 
-#Setup PATH
+# -=[ GOPATH
+# needed by various programs (Emacs), so set early
+export GOPATH=$HOME/Coding/go
 
+# -=[ PATH
 typeset -gU path
-
 path=(
   $HOME/.bin
+  $GOPATH/bin
   /usr/local/{bin,sbin}
   $path
 )
