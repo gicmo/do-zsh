@@ -16,6 +16,7 @@ typeset -gU path
 path=(
   $HOME/.bin
   $GOPATH/bin
+  $HOME/.cargo/bin
   /usr/local/{bin,sbin}
   $path
 )
