@@ -70,12 +70,7 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
-##################################################################
-# They set us up the prompt ...
-zshrc_load_status 'setting the prompt...'
-source $ZDIR/prompt
-
-##################################################################
+#################################################################
 # Plugins
 
 #deterime host for plugins and host adjustments
@@ -89,6 +84,7 @@ zplugs=(history-substring-search \
         pip                      \
         iterm2                   \
         syntax-highlighting      \
+        git-radar                \
        )
 
 zshrc_load_zplug $zplugs
@@ -111,6 +107,10 @@ alias ls="ls $LS_OPTIONS"
 zshrc_load_status 'loading completion...'
 source $ZDIR/completion
 
+##################################################################
+# They set us up the prompt ...
+zshrc_load_status 'setting the prompt...'
+source $ZDIR/prompt
 
 ################################################################
 # We are done (almost).
