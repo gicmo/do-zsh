@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Archey [version 0.2.8]
 #
@@ -110,12 +110,12 @@ whiteB = '\x1b[1;37m'
 def xmonadfix(str):
  if re.compile("xmonad").match(str): return "xmonad"
  return str
-p1 = Popen(['ps', '-u', getuser()], stdout=PIPE).communicate()[0].split('\n')
-processes = map(xmonadfix, [process.split()[3] for process in p1 if process])
+p1 = Popen(['ps', '-u', getuser()], stdout=PIPE, universal_newlines=True).communicate()[0].split('\n')
+processes = list(map(xmonadfix, [process.split()[3] for process in p1 if process]))
 p1 = None
 
 # Find Distro.
-DetectDistro = Popen(['lsb_release', '-i'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+DetectDistro = Popen(['lsb_release', '-i'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
 
 # Print coloured key with normal value.
 def output(key, value):
@@ -135,7 +135,7 @@ def output(key, value):
 
 # RAM Function.
 def ram_display():
- raminfo = Popen(['free', '-m'], stdout=PIPE).communicate()[0].split('\n')
+ raminfo = Popen(['free', '-m'], stdout=PIPE, universal_newlines=True).communicate()[0].split('\n')
  ram = ''.join(filter(re.compile('M').search, raminfo)).split()
  used = int(ram[2]) - int(ram[5]) - int(ram[6])
  usedpercent = ((float(used) / float(ram[1])) * 100)
@@ -152,40 +152,40 @@ def ram_display():
 # Screenshot Function.
 screen = '%s' % options.screenshot
 def screenshot():
- print 'Taking shot in',
- list = range(1,6)
+ print('Taking shot in', end=' ')
+ list = list(range(1,6))
  list.reverse()
  for x in list:
-   print '%s..' % x,
+   print('%s..' % x, end=' ')
    sys.stdout.flush()
    sleep(1)
- print 'Say Cheeze!'
+ print('Say Cheeze!')
  subprocess.check_call(['scrot'])
 
 # Operating System Function.
 def distro_display(): 
- arch = Popen(['uname', '-m'], stdout=PIPE).communicate()[0].rstrip('\n')
+ arch = Popen(['uname', '-m'], stdout=PIPE, universal_newlines=True).communicate()[0].rstrip('\n')
  if DetectDistro == 'Debian':
-  release = Popen(['lsb_release', '-r'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+  release = Popen(['lsb_release', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
   distro = 'Debian %s %s' % (release, arch)
  if DetectDistro == 'Ubuntu':
-  release = Popen(['lsb_release', '-r'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+  release = Popen(['lsb_release', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
   distro = 'Ubuntu %s %s' % (release, arch)
  if DetectDistro == 'Arch':
   distro = 'Arch Linux %s' % arch 
  if DetectDistro == 'Fedora':
-  release = Popen(['lsb_release', '-r'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+  release = Popen(['lsb_release', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
   distro = 'Fedora %s %s' % (release, arch) 
  if DetectDistro == 'CrunchBang':
-  release = Popen(['lsb_release', '-r'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+  release = Popen(['lsb_release', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
  if DetectDistro == 'LinuxMint':
-  release = Popen(['lsb_release', '-r'], stdout=PIPE).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
+  release = Popen(['lsb_release', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].split(':')[1].lstrip('\t').rstrip('\n')
   distro = 'Mint %s %s' % (release, arch)
  output('OS', distro)
 
 # Kernel Function.
 def kernel_display():
- kernel = Popen(['uname', '-r'], stdout=PIPE).communicate()[0].rstrip('\n')
+ kernel = Popen(['uname', '-r'], stdout=PIPE, universal_newlines=True).communicate()[0].rstrip('\n')
  output ('Kernel', kernel)
 
 def user_display():
@@ -194,7 +194,7 @@ def user_display():
 
 # Hostname Function.
 def hostname_display():
- hostname = Popen(['uname', '-n'], stdout=PIPE).communicate()[0].rstrip('\n')
+ hostname = Popen(['uname', '-n'], stdout=PIPE, universal_newlines=True).communicate()[0].rstrip('\n')
  output('Hostname', hostname)
 
 # CPU Function.
@@ -221,14 +221,14 @@ def uptime_display():
 
 # Desktop Environment Function.
 def de_display():
- for key in de_dict.keys():
+ for key in list(de_dict.keys()):
   if key in processes:
    de = de_dict[key]
    output ('Desktop Environment', de)
 
 # Window Manager Function.
 def wm_display():
- for key in wm_dict.keys():
+ for key in list(wm_dict.keys()):
   if key in processes:
    wm = wm_dict[key]
    output ('Window Manager', wm)
@@ -246,42 +246,42 @@ def term_display():
 # Packages Function.
 def packages_display():
  if DetectDistro == 'Ubuntu':
-  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE)
-  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE)
-  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE)
+  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
+  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE, universal_newlines=True)
   packages = p3.communicate()[0].rstrip('\n')
   output ('Packages', packages)
  if DetectDistro == 'Arch':
-  p1 = Popen(['pacman', '-Q'], stdout=PIPE)
-  p2 = Popen(['wc', '-l'], stdin=p1.stdout, stdout=PIPE)
+  p1 = Popen(['pacman', '-Q'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['wc', '-l'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
   packages = p2.communicate()[0].rstrip('\n')
   output ('Packages', packages)
  if DetectDistro == 'Debian':
-  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE)
-  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE)
-  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE)
+  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
+  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE, universal_newlines=True)
   packages = p3.communicate()[0].rstrip('\n')
   output ('Packages', packages)
  if DetectDistro == 'CrunchBang':
-  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE)
-  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE)
-  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE)
+  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
+  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE, universal_newlines=True)
   packages = p3.communicate()[0].rstrip('\n')
   output ('Packages', packages)
  if DetectDistro == 'Fedora':
-  p1 = Popen(['rpm', '-qa'], stdout=PIPE)
-  p2 = Popen(['wc', '-l'], stdin=p1.stdout, stdout=PIPE)
+  p1 = Popen(['rpm', '-qa'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['wc', '-l'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
   packages = p2.communicate()[0].rstrip('\n')
  if DetectDistro == 'LinuxMint':
-  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE)
-  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE)
-  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE)
+  p1 = Popen(['dpkg', '--get-selections'], stdout=PIPE, universal_newlines=True)
+  p2 = Popen(['grep', '-v', 'deinstall'], stdin=p1.stdout, stdout=PIPE, universal_newlines=True)
+  p3 = Popen(['wc', '-l'], stdin=p2.stdout, stdout=PIPE, universal_newlines=True)
   packages = p3.communicate()[0].rstrip('\n')
   output ('Packages', packages)
 
 # Disk Function.
 def disk_display():
- p1 = Popen(['df', '-Tlh', '--total', '-t', 'ext4', '-t', 'ext3', '-t', 'ext2', '-t', 'reiserfs', '-t', 'jfs', '-t', 'ntfs', '-t', 'fat32', '-t', 'btrfs', '-t', 'fuseblk'], stdout=PIPE).communicate()[0]
+ p1 = Popen(['df', '-Tlh', '--total', '-t', 'ext4', '-t', 'ext3', '-t', 'ext2', '-t', 'reiserfs', '-t', 'jfs', '-t', 'ntfs', '-t', 'fat32', '-t', 'btrfs', '-t', 'fuseblk'], stdout=PIPE, universal_newlines=True).communicate()[0]
  total = p1.splitlines()[-1]
  used = total.split()[3]
  size = total.split()[2]
@@ -304,11 +304,11 @@ for x in display:
  func()
 
 # Array containing values.
-result.extend(['']*(20 - len(display)))
+result.extend(['']*(20 - len(display) + 1))
 
 # Result.
 if DetectDistro == 'Ubuntu':
- print """
+ print("""
 %s                          .oyhhs:   %s
 %s                 ..--.., %sshhhhhh-   %s
 %s               -+++++++++`:%syyhhyo`  %s
@@ -327,10 +327,10 @@ if DetectDistro == 'Ubuntu':
 %s               `.:://::- %s-:::::;    %s
 %s                         `.-:-'     %s
 %s                                    %s
-%s""" % ( redN, result[0], redB, redN, result[1], redB, redN, result[2], yellowB, redB, redN, result[3], yellowB, redB, result[4], yellowB, redB, result[5], redB, yellowB, redB, result[6], redB, yellowB, redB, result[7], redB, yellowB, result[8], redB, yellowB, redN, result[9], redB, yellowB, redN, result[10], yellowB, redN, result[11], yellowB, redN, result[12], yellowB, redN, yellowB, result[13], redN, yellowB, result[14], redN, yellowB, result[15], yellowB, result[16], yellowB, result[17], clear )
+%s""" % ( redN, result[0], redB, redN, result[1], redB, redN, result[2], yellowB, redB, redN, result[3], yellowB, redB, result[4], yellowB, redB, result[5], redB, yellowB, redB, result[6], redB, yellowB, redB, result[7], redB, yellowB, result[8], redB, yellowB, redN, result[9], redB, yellowB, redN, result[10], yellowB, redN, result[11], yellowB, redN, result[12], yellowB, redN, yellowB, result[13], redN, yellowB, result[14], redN, yellowB, result[15], yellowB, result[16], yellowB, result[17], clear ))
 
 if DetectDistro == 'Arch':
- print """%s
+ print("""%s
 %s               +                %s
 %s               #                %s
 %s              ###               %s
@@ -348,10 +348,10 @@ if DetectDistro == 'Arch':
 %s   ######'           '######    %s
 %s  ;####                 ####;   %s
 %s  ##'                     '##  %s 
-%s #'                         `#  %s%s """ % (blueB, blueB, result[0], blueB, result[1], blueB, result[2], blueB, result[3], blueB, result[4], blueB, result[5], blueB, result[6], blueB, result[7], blueB, blueN, blueB, result[8], blueB, blueN, blueB, result[9], blueB, blueN, result[10], blueN, result[11], blueN, result[12], blueN, result[13], blueN, result[14], blueN, result[15], blueN, result[16], blueN, result[17], clear)
+%s #'                         `#  %s%s """ % (blueB, blueB, result[0], blueB, result[1], blueB, result[2], blueB, result[3], blueB, result[4], blueB, result[5], blueB, result[6], blueB, result[7], blueB, blueN, blueB, result[8], blueB, blueN, blueB, result[9], blueB, blueN, result[10], blueN, result[11], blueN, result[12], blueN, result[13], blueN, result[14], blueN, result[15], blueN, result[16], blueN, result[17], clear))
 
 if DetectDistro == 'Debian':
- print """%s
+ print("""%s
 %s                                  %s
 %s          _sudZUZ#Z#XZo=_         %s
 %s       _jmZZ2!!~---~!!X##wx       %s
@@ -370,10 +370,10 @@ if DetectDistro == 'Debian':
 %s         -)SSL,,                  %s
 %s            ~~~~~                 %s
 %s                                  %s
-%s """ % (redB, redB, result[0], redB, result[1], redB, result[2], redB, result[3], redB, result[4], redB, result[5], redB, result[6], redB, result[7], redB, result[8], redN, result[9], redN, result[10], redN, result[11], redN, result[12], redN, result[13], redN, result[14], redN, result[15], redN, result[16], redN, result[17], clear) 
+%s """ % (redB, redB, result[0], redB, result[1], redB, result[2], redB, result[3], redB, result[4], redB, result[5], redB, result[6], redB, result[7], redB, result[8], redN, result[9], redN, result[10], redN, result[11], redN, result[12], redN, result[13], redN, result[14], redN, result[15], redN, result[16], redN, result[17], clear)) 
 
 if DetectDistro == 'Fedora':
- print """
+ print("""
 %s           :/------------://        %s
 %s        :------------------://      %s
 %s      :-----------%s/shhdhyo/%s-://     %s
@@ -392,10 +392,10 @@ if DetectDistro == 'Fedora':
 %s :------%s:://:%s-----------://         %s
 %s :--------------------://           %s
 %s                                    %s
-%s """ % ( blueN, result[0], blueN, result[1], blueN, whiteB, blueN, result[2], blueN, whiteB, blueN, result[3], blueN, whiteB, blueN, result[4], blueN, whiteB, blueN, result[5], blueN, whiteB, blueN, result[6], blueN, whiteB, blueN, result[7], blueN, whiteB, blueN, result[8], blueN, whiteB, blueN, result[9], blueN, whiteB, blueN, result[10], blueN, whiteB, blueN, result[11], blueN, whiteB, blueN, result[12], blueN, whiteB, blueN, result[13], blueN, whiteB, blueN, result[14], blueN, whiteB, blueN, result[15], blueN, result[16], blueN, result[17], clear )
+%s """ % ( blueN, result[0], blueN, result[1], blueN, whiteB, blueN, result[2], blueN, whiteB, blueN, result[3], blueN, whiteB, blueN, result[4], blueN, whiteB, blueN, result[5], blueN, whiteB, blueN, result[6], blueN, whiteB, blueN, result[7], blueN, whiteB, blueN, result[8], blueN, whiteB, blueN, result[9], blueN, whiteB, blueN, result[10], blueN, whiteB, blueN, result[11], blueN, whiteB, blueN, result[12], blueN, whiteB, blueN, result[13], blueN, whiteB, blueN, result[14], blueN, whiteB, blueN, result[15], blueN, result[16], blueN, result[17], clear ))
 
 if DetectDistro == 'CrunchBang':
- print """                               
+ print("""                               
 %s                ___       ___      _  %s
 %s               /  /      /  /     | | %s
 %s              /  /      /  /      | | %s
@@ -414,10 +414,10 @@ if DetectDistro == 'CrunchBang':
 %s /__/      /__/                   |_| %s
 %s                                      %s
 %s                                      %s
-%s""" % ( whiteN, result[0], whiteN, result[1], whiteN, result[2], whiteN, result[3], whiteN, result[4], whiteN, result[5], whiteN, result[6], whiteN, result[7], whiteN, result[8], whiteN, result[9], whiteN, result[10], whiteN, result[11], whiteN, result[12], whiteN, result[13], whiteN, result[14], whiteN, result[15], whiteN, result[16], whiteN, result[17], clear )                                    
+%s""" % ( whiteN, result[0], whiteN, result[1], whiteN, result[2], whiteN, result[3], whiteN, result[4], whiteN, result[5], whiteN, result[6], whiteN, result[7], whiteN, result[8], whiteN, result[9], whiteN, result[10], whiteN, result[11], whiteN, result[12], whiteN, result[13], whiteN, result[14], whiteN, result[15], whiteN, result[16], whiteN, result[17], clear ))                                    
 
 if DetectDistro == 'LinuxMint':
- print """%s                                     %s
+ print("""%s                                     %s
 %s MMMMMMMMMMMMMMMMMMMMMMMMMmds+.      %s
 %s MMm----::-://////////////oymNMd+`   %s
 %s MMd      %s/++                %s-sNMd:  %s
@@ -435,7 +435,7 @@ if DetectDistro == 'LinuxMint':
 %s          ./ydNMMMMMMMMMMMMMMMMMMMMM %s
 %s                                     %s
 %s                                     %s
-%s""" % ( whiteB, result[0], whiteB, result[1], whiteB, result[2], whiteB, greenB, whiteB, result[3], whiteB, greenB, whiteB, result[4], whiteB, greenB, whiteB, result[5], whiteB, greenB, whiteB, result[6], whiteB, greenB, whiteB, result[7], whiteB, greenB, whiteB, result[8], whiteB, greenB, whiteB, result[9], whiteB, greenB, whiteB, result[10], whiteB, greenB, whiteB, result[11], whiteB, greenB, whiteB, result[12], whiteB, greenB, whiteB, result[13], whiteB, result[14], whiteB, result[15], whiteB, result[16], whiteB, result[17], clear )
+%s""" % ( whiteB, result[0], whiteB, result[1], whiteB, result[2], whiteB, greenB, whiteB, result[3], whiteB, greenB, whiteB, result[4], whiteB, greenB, whiteB, result[5], whiteB, greenB, whiteB, result[6], whiteB, greenB, whiteB, result[7], whiteB, greenB, whiteB, result[8], whiteB, greenB, whiteB, result[9], whiteB, greenB, whiteB, result[10], whiteB, greenB, whiteB, result[11], whiteB, greenB, whiteB, result[12], whiteB, greenB, whiteB, result[13], whiteB, result[14], whiteB, result[15], whiteB, result[16], whiteB, result[17], clear ))
 
 if screen == 'True':
  screenshot()
