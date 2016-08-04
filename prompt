@@ -36,14 +36,16 @@ function _prompt_pwd {
 
 _prompt_where() {
 
+  local grey="%{[38;5;246m%}"
+
   print -n "%{%f%b%k%}"
   if [[ -n $SSH_CLIENT || -n $REMOTEHOST || $USER != $LOGNAME || $(id -u) -eq 0 ]] {
     print -n "%{$fg[blue]%}%n%f@%{$fg[grey]%}%m%f"
   } else {
-    print -n "%{$fg[grey]%}λ%f"
+    print -n "%{${grey}%}λ%f"
   }
 
-  print -n " $(_prompt_pwd) %(!.%F{red}.%{$fg[grey]%})→%f"
+  print -n " $(_prompt_pwd) %(!.%F{red}.%{${grey}%})→%f"
 }
 
 setopt PROMPT_SUBST
