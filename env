@@ -14,7 +14,7 @@ export GOPATH=$HOME/Coding/go
 # -=[ PATH
 typeset -gU path
 path=(
-  $HOME/.bin
+  $HOME/.local/bin
   $GOPATH/bin
   $HOME/.cargo/bin
   /usr/local/{bin,sbin}
