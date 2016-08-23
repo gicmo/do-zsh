@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
 
 if [[ -x $(which most 2> /dev/null) ]]; then
-    export PAGER="most"
+    export MANPAGER="most"
 fi
