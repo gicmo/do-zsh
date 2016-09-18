@@ -40,7 +40,7 @@ _prompt_where() {
 
   print -n "%{%f%b%k%}"
   if [[ -n $SSH_CLIENT || -n $REMOTEHOST || $USER != $LOGNAME || $(id -u) -eq 0 ]] {
-    print -n "%{$fg[blue]%}%n%f@%{$fg[grey]%}%m%f"
+    print -n "%{$fg[blue]%}%n%f@%{${grey}%}%m%f"
   } else {
     print -n "%{${grey}%}λ%f"
   }
