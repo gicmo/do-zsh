@@ -82,8 +82,7 @@ zplugs=(history-substring-search \
         forklift                 \
         archey                   \
         pip                      \
-        iterm2                   \
-	    man                      \
+        man                      \
         syntax-highlighting      \
         git-radar                \
        )
