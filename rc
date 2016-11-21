@@ -84,6 +84,7 @@ zplugs=(history-substring-search \
         pip                      \
         man                      \
         syntax-highlighting      \
+        autosuggestions          \
         git-radar                \
        )
 

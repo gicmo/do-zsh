@@ -10,3 +10,6 @@
 [submodule "plugins/git-radar"]
 	path = plugins/git-radar
 	url = https://github.com/michaeldfallen/git-radar.git
+[submodule "plugins/autosuggestions"]
+	path = plugins/autosuggestions
+	url = git://github.com/zsh-users/zsh-autosuggestions
