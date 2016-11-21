@@ -11,15 +11,6 @@ _prompt_jobs() {
     echo -n "$jobs_status"
 }
 
-_git_status() {
-    local git_status
-    git_status=("")
-    if (( ${+commands[git-radar]} )) {
-	   git_status=`git-radar --zsh --fetch`
-    }
-    echo -n "$git_status"
-}
-
 function _prompt_pwd {
   setopt LOCAL_OPTIONS
   setopt EXTENDED_GLOB
@@ -49,5 +40,8 @@ _prompt_where() {
 }
 
 setopt PROMPT_SUBST
-RPROMPT='${return_code}$(_prompt_jobs)$(_git_status)'
+RPROMPT='${return_code}$(_prompt_jobs)'
+if (( ${+commands[git-radar]} )) {
+  RPROMPT="$RPROMPT\$(git-radar --zsh --fetch)"
+}
 PROMPT='$(_prompt_where) '
