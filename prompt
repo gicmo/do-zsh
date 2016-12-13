@@ -28,6 +28,8 @@ function _prompt_pwd {
 _prompt_where() {
 
   local grey="%{[38;5;246m%}"
+  local orange="%{[38;5;208m%}"
+  local cagein=""
 
   print -n "%{%f%b%k%}"
   if [[ -n $SSH_CLIENT || -n $REMOTEHOST || $USER != $LOGNAME || $(id -u) -eq 0 ]] {
@@ -36,7 +38,13 @@ _prompt_where() {
     print -n "%{${grey}%}λ%f"
   }
 
-  print -n " $(_prompt_pwd) %(!.%F{red}.%{${grey}%})→%f"
+  if [[ "$UNDER_JHBUILD" = "true" ]] {
+    cagein=${orange}
+  } else {
+    cagein=${gray}
+  }
+
+  print -n " $(_prompt_pwd) %(!.%F{red}.%{${cagein}%})→%f"
 }
 
 setopt PROMPT_SUBST
