@@ -133,22 +133,24 @@ def output(key, value):
   output = '%s%s:%s %s' % (greenB, key, clear, value) 
  result.append(output)
 
+
 # RAM Function.
 def ram_display():
- raminfo = Popen(['free', '-m'], stdout=PIPE, universal_newlines=True).communicate()[0].split('\n')
- ram = ''.join(filter(re.compile('M').search, raminfo)).split()
- used = int(ram[2]) - int(ram[5]) - int(ram[6])
- usedpercent = ((float(used) / float(ram[1])) * 100)
- if usedpercent <= 33:
-  ramdisplay = '%s%s MB %s/ %s MB' % (greenB, used, clear, ram[1])
-  output('RAM', ramdisplay)
- if usedpercent > 33 and usedpercent < 67:
-  ramdisplay = '%s%s MB %s/ %s MB' % (yellowB, used, clear, ram[1])
-  output('RAM', ramdisplay)
- if usedpercent >= 67:
-  ramdisplay = '%s%s MB %s/ %s MB' % (redB, used, clear, ram[1])
-  output('RAM', ramdisplay)
-  
+    out = Popen(['free', '-m'], stdout=PIPE, universal_newlines=True).communicate()
+    raminfo = out[0].split('\n')
+    ram = ''.join(filter(re.compile('M').search, raminfo)).split()
+    nums = list(map(int, ram[1:]))
+    total, avail = nums[0], nums[5]
+    availpercent = ((float(avail) / float(total)) * 100)
+    if availpercent >= 80:
+        ramdisplay = '%s%s MB %s/ %s MB' % (greenB, avail, clear, total)
+    elif availpercent <= 20:
+        ramdisplay = '%s%s MB %s/ %s MB' % (redB, avail, clear, total)
+    else:
+        ramdisplay = '%s%s MB %s/ %s MB' % (yellowB, avail, clear, total)
+    output('RAM', ramdisplay)
+
+
 # Screenshot Function.
 screen = '%s' % options.screenshot
 def screenshot():
