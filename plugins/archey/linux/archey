@@ -199,11 +199,13 @@ def hostname_display():
  hostname = Popen(['uname', '-n'], stdout=PIPE, universal_newlines=True).communicate()[0].rstrip('\n')
  output('Hostname', hostname)
 
+
 # CPU Function.
 def cpu_display():
- file = open('/proc/cpuinfo').readlines()
- cpuinfo = re.sub('  +', ' ', file[4].replace('model name\t: ', '').rstrip('\n'))
- output ('CPU', cpuinfo) 
+    file = open('/proc/cpuinfo').readlines()
+    cpuinfo = re.sub('  +', ' ', file[4].replace('model name\t: ', '').rstrip('\n'))
+    cpuinfo = cpuinfo.replace("(R)", '®').replace('(TM)', '™').replace(' CPU ', ' ')
+    output ('CPU', cpuinfo) 
 
 # Uptime Function.
 def uptime_display():
