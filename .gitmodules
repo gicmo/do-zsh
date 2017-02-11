@@ -6,7 +6,7 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "plugins/archey/darwin"]
 	path = plugins/archey/darwin
-	url = git@github.com:gicmo/archey-osx.git
+	url = https://github.com/obihann/archey-osx.git
 [submodule "plugins/git-radar"]
 	path = plugins/git-radar
 	url = https://github.com/michaeldfallen/git-radar.git
