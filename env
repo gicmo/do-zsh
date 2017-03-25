@@ -7,9 +7,12 @@
 
 export EMAIL_ADDRESS="christian@kellner.me"
 
-# -=[ GOPATH
+# -=[ Coding env variables
 # needed by various programs (Emacs), so set early
-export GOPATH=$HOME/Coding/go
+export CODE_HOME=$HOME/Code
+export GOPATH=$CODE_HOME/go
+export RUST_SRC_PATH=$CODE_HOME/src/rust/src
+export WORKON_HOME=$CODE_HOME/envs
 
 # -=[ PATH
 typeset -gU path
