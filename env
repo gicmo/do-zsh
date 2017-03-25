@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
-# zshenv file © 2011-2015 Christian Kellner <christian@kellner.me>
+# zshenv file © 2011-2017 Christian Kellner <christian@kellner.me>
 #   - first file to be executed, before zshrc
 
 ##################################################################
 # Environment setup
 
-export EMAIL_ADDRESS="ck@xatom.net"
+export EMAIL_ADDRESS="christian@kellner.me"
 
 # -=[ GOPATH
 # needed by various programs (Emacs), so set early
