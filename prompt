@@ -29,6 +29,7 @@ _prompt_where() {
 
   local grey="%{[38;5;246m%}"
   local orange="%{[38;5;208m%}"
+  local yellow="%{[38;5;220m%}"
   local cagein=""
 
   print -n "%{%f%b%k%}"
@@ -40,6 +41,8 @@ _prompt_where() {
 
   if [[ "$UNDER_JHBUILD" = "true" ]] {
     cagein=${orange}
+  } elif [[ -n ${VIRTUAL_ENV} ]] {
+    cagein=${yellow}
   } else {
     cagein=${gray}
   }
@@ -52,4 +55,5 @@ RPROMPT='${return_code}$(_prompt_jobs)'
 if (( ${+commands[git-radar]} )) {
   RPROMPT="$RPROMPT\$(git-radar --zsh --fetch)"
 }
+
 PROMPT='$(_prompt_where) '
