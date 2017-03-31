@@ -29,6 +29,7 @@ _prompt_where() {
 
   local grey="%{[38;5;246m%}"
   local orange="%{[38;5;208m%}"
+  local blue="%{[38;5;45m%}"
   local yellow="%{[38;5;220m%}"
   local cagein=""
 
@@ -40,7 +41,7 @@ _prompt_where() {
   }
 
   if [[ "$UNDER_JHBUILD" = "true" ]] {
-    cagein=${orange}
+    cagein=${blue}
   } elif [[ -n ${VIRTUAL_ENV} ]] {
     cagein=${yellow}
   } else {
