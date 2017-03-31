@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+virtualenvwrapper='virtualenvwrapper_lazy.sh'
+
+if (( $+commands[$virtualenvwrapper] )); then
+    export VIRTUALENVWRAPPER_PYTHON=`which python3`
+    local virtualenv='py3-virtualenv'
+
+    if (( $+commands[$virtualenv] )); then
+	export VIRTUALENVWRAPPER_VIRTUALENV="$virtualenv"
+    fi
+
+    function {
+	setopt local_options
+	unsetopt equals
+	source ${${virtualenvwrapper}:c} &> /dev/null
+    }
+
+fi
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1

@@ -87,6 +87,7 @@ zplugs=(history-substring-search \
         autosuggestions          \
         git-radar                \
 	emacsclient              \
+	python                   \
        )
 
 zshrc_load_zplug $zplugs
