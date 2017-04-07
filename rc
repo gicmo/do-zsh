@@ -34,6 +34,10 @@ case $TERM in
 xterm*|screen*|rxvt*)
   precmd () { print -Pn "\e]0;%n@%m [%3c]\a"}
   ;;
+dumb)
+  zshrc_play_dumb
+  return
+  ;;
 esac
 
 ##################################################################

@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+#autoload
+
+unsetopt zle
+unsetopt prompt_cr
+unsetopt prompt_subst
+unfunction precmd
+PS1='$ '
+
+# -*- mode: Shell-script ;-*-
