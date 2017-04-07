@@ -32,8 +32,8 @@ export REPORTTIME=6
 
 case $TERM in
 xterm*|screen*|rxvt*)
-precmd () { print -Pn "\e]0;%n@%m [%3c]\a"}
-;;
+  precmd () { print -Pn "\e]0;%n@%m [%3c]\a"}
+  ;;
 esac
 
 ##################################################################
@@ -86,8 +86,8 @@ zplugs=(history-substring-search \
         syntax-highlighting      \
         autosuggestions          \
         git-radar                \
-	emacsclient              \
-	python                   \
+        emacsclient              \
+        python                   \
        )
 
 zshrc_load_zplug $zplugs
@@ -98,7 +98,7 @@ zshrc_load_zplug $zplugs
 local perhostfile=$ZDIR/os/$host_type
 
 if [[ -f $perhostfile ]]; then
-    source $perhostfile
+  source $perhostfile
 fi
 
 #LS_COLORS got defined per arch in the specific files
