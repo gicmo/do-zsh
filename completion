@@ -35,11 +35,18 @@ fi
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+[ -z "$ck_default_completion" ] && {
+  binding=$(bindkey '^I')
+  [[ $binding =~ 'undefined-key' ]] || ck_default_completion=$binding[(s: :w)2]
+  unset binding
+}
+
 #from zsh-users
 expand-or-complete-with-dots() {
   echo -n "\e[31m ⚙ \e[0m"
-  zle expand-or-complete
+  zle ${ck_default_completion:-expand-or-complete}
   zle redisplay
 }
+
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
