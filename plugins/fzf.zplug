@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+if type "fzf" > /dev/null && [[ $- == *i* ]]; then
+local fzf_shell_root
+
+if [[ -d "$GOPATH/src/github.com/junegunn/fzf/shell" ]]; then
+  fzf_shell_root="$GOPATH/src/github.com/junegunn/fzf/shell"
+elif [[ -d "/usr/local/opt/fzf/shell" ]]; then
+  fzf_shell_root="/usr/local/opt/fzf/shell/"
+fi
+
+source "${fzf_shell_root}/completion.zsh"
+source "${fzf_shell_root}/key-bindings.zsh"
+
+export FZF_DEFAULT_OPTS='
+  --height 20% --reverse --multi
+  --color fg:252,bg:233,hl:67,fg+:252,bg+:235,hl+:81
+  --color info:144,prompt:161,spinner:135,pointer:135,marker:118
+  --preview "(highlight -O ansi -l {} 2> /dev/null ||
+              cat {} ||
+	      (test -d {} && tree -C {})
+             ) 2> /dev/null | head -200"
+  --bind ctrl-k:kill-line
+  --bind "?:toggle-preview"
+'
+
+export FZF_CTRL_R_OPTS='
+  --preview "echo {}"
+  --preview-window down:3:hidden
+  --bind "?:toggle-preview"'
+fi
