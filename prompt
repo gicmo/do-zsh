@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # -*- mode: Shell-script ;-*-
 
+setopt transient_rprompt
+
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%} )"
 
 #
