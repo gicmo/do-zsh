@@ -18,6 +18,7 @@ setenv() { export $1=$2 }
 
 setopt nobeep		# BEEEEEEEEEEEP!
 setopt correct
+setopt correctall
 
 setopt autocd           # change to dirs without cd
 setopt auto_name_dirs
