@@ -9,6 +9,36 @@ elif [[ -d "/usr/local/opt/fzf/shell" ]]; then
   fzf_shell_root="/usr/local/opt/fzf/shell/"
 fi
 
+
+_fzf_compgen_path() {
+  echo "$1"
+  command find -L . -mindepth 1 \
+          \( -path '*/\.*' \
+             -o -path '*/node_modules*' \
+             -o -fstype 'sysfs' \
+             -o -fstype 'devfs' \
+             -o -fstype 'devtmpfs' \
+             -o -fstype 'proc' \) -prune \
+          -o -type f -print \
+          -o -type d -print \
+          -o -type l -print 2> /dev/null \
+    | cut -b3-
+}
+
+
+_fzf_compgen_dir() {
+  command find -L "$1" \
+          -mindepth 1  \
+          \( -path '*/\.*' \
+             -o -path '*/node_modules*' \
+             -o -fstype 'sysfs' \
+             -o -fstype 'devfs' \
+             -o -fstype 'devtmpfs' \
+             -o -fstype 'proc' \) -prune \
+          -o -type d -print 2> /dev/null  \
+    | cut -b3-
+}
+
 source "${fzf_shell_root}/completion.zsh"
 
 __fzf_use_tmux__() {
