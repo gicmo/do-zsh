@@ -28,7 +28,7 @@ setopt pushd_ignore_dups
 # jump to each element in a path with m-f m-b, same for kill-word, etc.
 export WORDCHARS=''
 
-export REPORTTIME=6
+export REPORTTIME=10
 
 case $TERM in
 xterm*|screen*|rxvt*)
