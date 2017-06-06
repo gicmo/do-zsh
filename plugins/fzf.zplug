@@ -3,10 +3,12 @@
 if type "fzf" > /dev/null && [[ $- == *i* ]]; then
 local fzf_shell_root
 
-if [[ -d "$GOPATH/src/github.com/junegunn/fzf/shell" ]]; then
-  fzf_shell_root="$GOPATH/src/github.com/junegunn/fzf/shell"
+if [[ -d "/usr/share/fzf" ]]; then
+  fzf_shell_root="/usr/share/fzf"
 elif [[ -d "/usr/local/opt/fzf/shell" ]]; then
   fzf_shell_root="/usr/local/opt/fzf/shell/"
+elif [[ -d "$GOPATH/src/github.com/junegunn/fzf/shell" ]]; then
+  fzf_shell_root="$GOPATH/src/github.com/junegunn/fzf/shell"
 fi
 
 
