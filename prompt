@@ -14,8 +14,7 @@ _prompt_jobs() {
 }
 
 function _prompt_pwd {
-  setopt LOCAL_OPTIONS
-  setopt EXTENDED_GLOB
+  setopt localoptions extendedglob
   # adapted from gh:sorin-ionescu/prezto
   local pwd="${PWD/#$HOME/~}"
 
