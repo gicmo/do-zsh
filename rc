@@ -18,7 +18,7 @@ setenv() { export $1=$2 }
 
 setopt nobeep		# BEEEEEEEEEEEP!
 setopt correct
-setopt correctall
+# setopt correctall
 
 setopt autocd           # change to dirs without cd
 setopt auto_name_dirs
@@ -125,4 +125,3 @@ source $ZDIR/prompt
 ################################################################
 # We are done (almost).
 echo -n "\r\e[0K"
-
