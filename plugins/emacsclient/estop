@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+if [ ! -n "${ZPLUGDIR+1}" ]; then
+  ZPLUGDIR=$HOME/.zsh/plugins
+  source $ZPLUGDIR/emacsclient/common.zsh
+fi
+
+if [ "$(emacs_server_running)" = "t" ]; then
+  echo "Shutting down Emacs server"
+  emacsclient -e '(kill-emacs)'
+else
+  echo "Emacs server not running"
+fi

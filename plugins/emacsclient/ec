@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+if [ ! -n "${ZPLUGDIR+1}" ]; then
+  ZPLUGDIR=$HOME/.zsh/plugins
+  source $ZPLUGDIR/emacsclient/common.zsh
+fi
+
+if [ "$(emacs_server_gui)" = "t" ]; then
+    emacs_set_focus
+    test "$#" -ne "0" && emacsclient -n "$@"
+    return
+fi
+
+# try switching to the frame in case it is just minimized
+# will start a server if not running
+test "$(emacs_visible_frames)" -eq "1" && emacs_set_focus
+
+# now we are guaranteed to have a server running, check
+# if we need to create a frame (daemon with no frames
+# visible count 1)
+if [ "$(emacs_visible_frames)" -lt  "2" ]; then
+    # -c $@ with no args just opens the scratch buffer
+    emacsclient -n -c "$@" && emacs_set_focus
+else
+    emacs_set_focus
+    # -n $@ errors if there are no args
+    test "$#" -ne "0" && emacsclient -n "$@"
+fi
