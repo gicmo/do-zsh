@@ -94,7 +94,7 @@ zplugs=(history-substring-search \
         git-radar                \
         emacsclient              \
         python                   \
-	fzf                      \
+	      fzf                      \
        )
 
 zshrc_load_zplug $zplugs
