@@ -41,7 +41,10 @@ _fzf_compgen_dir() {
     | cut -b3-
 }
 
-source "${fzf_shell_root}/completion.zsh"
+if [[ -f "${fzf_shell_root}/completion.zsh" ]]; then
+  source "${fzf_shell_root}/completion.zsh"
+fi
+source /usr/share/zsh/site-functions/fzf
 
 __fzf_use_tmux__() {
   [ -n "$TMUX_PANE" ] && [ "${FZF_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
