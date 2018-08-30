@@ -15,3 +15,7 @@ emacs_server_running() {
 emacs_server_gui() {
     emacsclient -a "false" -e "(and (boundp 'server-process) (not (daemonp)))" 2> /dev/null
 }
+
+export VISUAL="ew"
+export CVSEDITOR="ew"
+export EDITOR="ew"

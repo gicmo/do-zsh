@@ -13,8 +13,4 @@ fi
 export GTK_DEFAULT_FILECHOOSER_DIR=$HOME
 
 #editor setup
-export VISUAL="gvim -f"
-export EDITOR="$VISUAL"
-export CVSEDITOR="gvim -f"
 alias mvim=gvim
-
